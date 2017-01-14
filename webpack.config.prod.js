@@ -1,5 +1,7 @@
 import path from 'path';
 import webpack from 'webpack';
+import HtmlWebpackPlugin from 'html-webpack-plugin';
+
 export default {
   debug: true,
   devtool: 'source-map',
@@ -14,6 +16,14 @@ export default {
     filename: 'bundle.js'
   },
   plugins: [
+    new HtmlWebpackPlugin({
+      template: 'src/index.html',
+      minify: {
+        removeComments: true,
+        collapseWhitespace: true
+      },
+      inject: true
+    }),
     new webpack.optimize.DedupePlugin(),
     new webpack.optimize.UglifyJsPlugin()
   ],
